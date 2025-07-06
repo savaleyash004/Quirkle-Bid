@@ -62,8 +62,8 @@ const Footer = () => {
           © {new Date().getFullYear()}
           <Link to="/admin/dashboard" className=" ml-1 no-underline">
             <p className="text-sm font-bold text-theme-color font-Roboto">
-              <span className="uppercase text-theme-color"> B</span>id
-              <span className="uppercase text-theme-color">F</span>air
+              <span className="uppercase text-theme-color"> Q</span>uirkle
+              <span className="uppercase text-theme-color">B</span>id
             </p>
           </Link>
           . All Rights Reserved.
