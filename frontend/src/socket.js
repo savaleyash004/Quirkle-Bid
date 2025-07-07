@@ -1,6 +1,9 @@
 // src/socket.js
-import io from "socket.io-client";
+import { io } from "socket.io-client";
 
-const socket = io("http://localhost:8000"); 
+const socket = io("https://quirkle-bid.onrender.com", {
+  withCredentials: true,
+  transports: ["websocket", "polling"]
+});
 
 export default socket;
