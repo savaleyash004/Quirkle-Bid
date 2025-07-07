@@ -5,6 +5,7 @@ import { getCartItems, reset } from "../store/cart/cartSlice";
 import axios from "axios";
 import { useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import API_BASE_URL from '../config';
 
 const Cart = () => {
   const [cartItem, setCartItem] = useState();
@@ -53,7 +54,7 @@ const Cart = () => {
     ];
     const sendProductData = { id: product._id, lineItems: lineItems };
     const { data } = await axios.post(
-      "http://localhost:8000/api/v1/payments/checkout",
+      `${API_BASE_URL}/payments/checkout`,
       {
         sendProductData,
       },

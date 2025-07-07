@@ -10,6 +10,7 @@ import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { getCurrentUser } from "../store/auth/authSlice";
 import { toast } from "react-toastify";
+import API_BASE_URL from '../config';
 
 const stripe = await loadStripe(
   "pk_test_51P5t81Lvvxf0OOpItZ5a94EMI92eFidBTy8oWVF7XTsHTwu17Q9BB292AQjV6s3fjSoWdp60vlG1jG090s6QgDm100UKAL5SIR"
@@ -66,7 +67,7 @@ const CheckoutForm = () => {
       if (user?.paymentVerified){
         axios
           .post(
-            "http://localhost:8000/api/v1/payments/update-payment-method",
+            `${API_BASE_URL}/payments/update-payment-method`,
             { paymentMethodId: paymentMethod.id },
             { withCredentials: true }
           )
@@ -91,7 +92,7 @@ const CheckoutForm = () => {
         } else {
         axios
           .post(
-            "http://localhost:8000/api/v1/payments/add-payment-method",
+            `${API_BASE_URL}/payments/add-payment-method`,
             {
               paymentMethodId: paymentMethod.id,
             },

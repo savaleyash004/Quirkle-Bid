@@ -1,12 +1,9 @@
 import axios from "axios";
-
-
-const API_URL = 'http://localhost:8000/api/v1';
-
+import API_BASE_URL from '../../config';
 
 
 export const getNotificationForUser = async () => {
-    const response = await axios.get(`${API_URL}/notifications/get-notifications`, {
+    const response = await axios.get(`${API_BASE_URL}/notifications/get-notifications`, {
         withCredentials: true,
         
     });
@@ -16,7 +13,7 @@ export const getNotificationForUser = async () => {
 
 
 export const markNotificationAsRead= async (id) => {
-    const response = await axios.put(`${API_URL}/notifications/mark-as-read/${id}`, {}, {
+    const response = await axios.put(`${API_BASE_URL}/notifications/mark-as-read/${id}`, {}, {
         withCredentials: true,
         
     });
@@ -28,7 +25,7 @@ export const markNotificationAsRead= async (id) => {
 
   export  const sendNewBidNotification= async (data) => {
     //console.log(data, " data from sendNewBidNotification");
-    const response = await axios.post(`${API_URL}/notifications/send-notification`, data, {
+    const response = await axios.post(`${API_BASE_URL}/notifications/send-notification`, data, {
         withCredentials: true,
         
     });
@@ -39,7 +36,7 @@ export const markNotificationAsRead= async (id) => {
 
 
   export const markAllNotificationsAsRead= async () => {
-    const response = await axios.put(`${API_URL}/notifications/mark-all-as-read`, {}, {
+    const response = await axios.put(`${API_BASE_URL}/notifications/mark-all-as-read`, {}, {
         withCredentials: true,
         
     });

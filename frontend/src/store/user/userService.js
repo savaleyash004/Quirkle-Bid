@@ -1,10 +1,8 @@
 import axios from "axios";
-
-const API_URL = 'http://localhost:8000/api/v1';
-
+import API_BASE_URL from '../../config';
 
 const getAllUsers=async () => {
-    const response = await axios.get(`${API_URL}/users`,{
+    const response = await axios.get(`${API_BASE_URL}/users`,{
         withCredentials:true
     
     });
@@ -14,7 +12,7 @@ const getAllUsers=async () => {
 
 //get single user by id
 const getUserById=async (data) => {
-    const response = await axios.get(`${API_URL}/users/${data}`,{
+    const response = await axios.get(`${API_BASE_URL}/users/${data}`,{
         withCredentials:true
     });
     //console.log('response get single user', response.data);
@@ -23,7 +21,7 @@ const getUserById=async (data) => {
 
 //update user by id update-user/665199e75a0743671dff61c1
 const updateUserById=async (data) => {
-    const response = await axios.put(`${API_URL}/users/update-user/${data.id}`,data.data,{
+    const response = await axios.put(`${API_BASE_URL}/users/update-user/${data.id}`,data.data,{
         withCredentials:true
     });
     //console.log('response update user', response.data);
@@ -33,7 +31,7 @@ const updateUserById=async (data) => {
 
 //delete a user by id
 const deleteUserById=async (data) => {
-    const response = await axios.delete(`${API_URL}/users/${data}`,{
+    const response = await axios.delete(`${API_BASE_URL}/users/${data}`,{
         withCredentials:true
     });
     //console.log('response delete user', response.data);
@@ -42,7 +40,7 @@ const deleteUserById=async (data) => {
 
 //get top sellers
 const getTopSellers=async () => {
-    const response = await axios.get(`${API_URL}/users/top-sellers`,{
+    const response = await axios.get(`${API_BASE_URL}/users/top-sellers`,{
         withCredentials:true
     });
     //console.log('response get top sellers', response.data);

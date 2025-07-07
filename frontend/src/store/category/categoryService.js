@@ -1,16 +1,15 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8000/api/v1";
+import API_BASE_URL from '../../config';
 
 export const getAllCategories = async () => {
-  const response = await axios.get(`${API_URL}/product-categories`);
+  const response = await axios.get(`${API_BASE_URL}/product-categories`);
   //console.log("response categories", response.data);
   return response.data;
 };
 
 //createCategory
 export const createCategory = async (data) => {
-  const response = await axios.post(`${API_URL}/product-categories`, data, {
+  const response = await axios.post(`${API_BASE_URL}/product-categories`, data, {
     withCredentials: true,
   });
   //console.log("create categories", response.data);
@@ -20,7 +19,7 @@ export const createCategory = async (data) => {
 
 //get a single category
 export const getSingleCategory = async (id) => {
-  const response = await axios.get(`${API_URL}/product-categories/${id}`);
+  const response = await axios.get(`${API_BASE_URL}/product-categories/${id}`);
   //console.log("response category", response.data);
   return response.data.data;
 };
@@ -29,7 +28,7 @@ export const getSingleCategory = async (id) => {
 export const updateCategory = async (data) => {
   //console.log(data.id, data.data, ",,,,,,,,");
   const response = await axios.put(
-    `${API_URL}/product-categories/${data.id}`,
+    `${API_BASE_URL}/product-categories/${data.id}`,
     data.data,
     {
       withCredentials: true,
@@ -41,7 +40,7 @@ export const updateCategory = async (data) => {
 
 //delete a category
 export const deleteCategory = async (id) => {
-  const response = await axios.delete(`${API_URL}/product-categories/${id}`, {
+  const response = await axios.delete(`${API_BASE_URL}/product-categories/${id}`, {
     withCredentials: true,
   });
   //console.log("response category", response.data);
@@ -52,7 +51,7 @@ export const deleteCategory = async (id) => {
 //get more detail about category
  export const getCategoriesMoreDetail = async () => {
 
-  const response = await axios.get(`${API_URL}/product-categories/detail`, {
+  const response = await axios.get(`${API_BASE_URL}/product-categories/detail`, {
     withCredentials: true,
   });
   //console.log("response categories", response.data);
@@ -61,7 +60,7 @@ export const deleteCategory = async (id) => {
 
 //top 5 categoriess
 export const getTopCategories = async () => {
-  const response = await axios.get(`${API_URL}/product-categories/top`, {
+  const response = await axios.get(`${API_BASE_URL}/product-categories/top`, {
     withCredentials: true,
   });
   //console.log("response categories", response.data);

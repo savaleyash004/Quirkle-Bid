@@ -1,8 +1,5 @@
 import axios from "axios";
-
-
-const API_URL = 'http://localhost:8000/api/v1';
-
+import API_BASE_URL from '../../config';
 
 
 // export const getAllCities = async () => {
@@ -13,7 +10,7 @@ const API_URL = 'http://localhost:8000/api/v1';
 
 
 export const getCartItems=async ()=>{
-    const response = await axios.get(`${API_URL}/cart`,{
+    const response = await axios.get(`${API_BASE_URL}/cart`,{
         withCredentials:true
     });
     //console.log('response cart', response.data);
@@ -21,7 +18,7 @@ export const getCartItems=async ()=>{
 }
 
 export const deleteCartItem=async(id)=>{
-    const response = await axios.delete(`${API_URL}/cart/${id}`,{
+    const response = await axios.delete(`${API_BASE_URL}/cart/${id}`,{
         withCredentials:true
     });
     //console.log('response delete cart', response.data);

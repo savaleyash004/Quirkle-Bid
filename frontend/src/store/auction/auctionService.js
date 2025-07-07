@@ -1,12 +1,11 @@
 import axios from "axios";
-
-const API_URL = "http://localhost:8000/api/v1";
+import API_BASE_URL from '../../config';
 
 const createAuction = async (data) => {
   //console.log("data..... create auction ........", data);
   try {
     const response = await axios.post(
-      `${API_URL}/auctions/create-auction`,
+      `${API_BASE_URL}/auctions/create-auction`,
       data,
       { withCredentials: true }
     );
@@ -23,7 +22,7 @@ const createAuction = async (data) => {
 const getAllAuctions = async (data) => {
   try {
     //console.log(data, "data");
-    const response = await axios.post(`${API_URL}/auctions`, data);
+    const response = await axios.post(`${API_BASE_URL}/auctions`, data);
     //console.log("response getAllAuctions", response.data);
     return response.data;
   } catch (error) {
@@ -36,7 +35,7 @@ const getAllAuctions = async (data) => {
 
 const getSingleAuctionById = async (id) => {
   try {
-    const res = await axios.get(`${API_URL}/auctions/${id}`);
+    const res = await axios.get(`${API_BASE_URL}/auctions/${id}`);
     //console.log("res.data", res.data);
     return res.data;
   } catch (err) {
@@ -52,7 +51,7 @@ const updateAuctionStatus = async (data) => {
   try {
     //console.log("data updateAuctionStatus", data);
     const response = await axios.post(
-      `${API_URL}/auctions/${data.id}/status`,
+      `${API_BASE_URL}/auctions/${data.id}/status`,
       { status: data.status },
       { withCredentials: true }
     );
@@ -70,7 +69,7 @@ const selectAuctionWinner = async (data) => {
   try {
     //console.log("data selectAuctionWinner", data);
     const response = await axios.get(
-      `http://localhost:8000/api/v1/bids/${data.id}/winner`
+      `${API_BASE_URL}/bids/${data.id}/winner`
     );
     //console.log("response selectAuctionWinner", response.data);
     return response.data;
@@ -84,7 +83,7 @@ const selectAuctionWinner = async (data) => {
 
 const getSellerAuction = async () => {
   try {
-    const response = await axios.get(`${API_URL}/auctions/user-auctions`, {
+    const response = await axios.get(`${API_BASE_URL}/auctions/user-auctions`, {
       withCredentials: true,
     });
     //console.log("response getSellerAuction", response.data);
@@ -99,7 +98,7 @@ const getSellerAuction = async () => {
 
 const deleteSingleAuctionById = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/auctions/delete/${id}`, {
+    const response = await axios.delete(`${API_BASE_URL}/auctions/delete/${id}`, {
       withCredentials: true,
     });
     //console.log("response deleteSingleAuctionById", response.data);
@@ -114,7 +113,7 @@ const deleteSingleAuctionById = async (id) => {
 
 const deleteAuctionByAdminById = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/auctions/admin-delete/${id}`, {
+    const response = await axios.delete(`${API_BASE_URL}/auctions/admin-delete/${id}`, {
       withCredentials: true,
     });
     //console.log("response deleteSingleAuctionById", response.data);
@@ -131,7 +130,7 @@ const updateSingleAuction=async(data)=>{
     //console.log(data.data, "data updateSingleAuction");
 
     try{
-        const response = await axios.put(`${API_URL}/auctions/update/${data.id}`,data.data, {withCredentials:true});
+        const response = await axios.put(`${API_BASE_URL}/auctions/update/${data.id}`,data.data, {withCredentials:true});
         //console.log("response updateSingleAuction", response.data);
         return response.data;
     }catch(error){
@@ -143,7 +142,7 @@ const updateSingleAuction=async(data)=>{
 
 const getWinnerDetail=async(id)=>{
     try{
-        const response = await axios.get(`${API_URL}/auctions/${id}/winner`);
+        const response = await axios.get(`${API_BASE_URL}/auctions/${id}/winner`);
         //console.log("response getWinnerDetail", response.data);
         return response.data;
     }catch(error){
@@ -156,7 +155,7 @@ const getWinnerDetail=async(id)=>{
 
 const getLiveAuctions=async()=>{
     try{
-        const response = await axios.get(`${API_URL}/auctions/live-auctions`);
+        const response = await axios.get(`${API_BASE_URL}/auctions/live-auctions`);
         //console.log("response getLiveAuctions", response.data);
         return response.data;
     }catch(error){
@@ -168,7 +167,7 @@ const getLiveAuctions=async()=>{
 
 const getUpcomingAuctions=async()=>{
   try{
-      const response = await axios.get(`${API_URL}/auctions/upcoming-auctions`);
+      const response = await axios.get(`${API_BASE_URL}/auctions/upcoming-auctions`);
       //console.log("response getLiveAuctions", response.data);
       return response.data;
   }catch(error){
@@ -179,7 +178,7 @@ const getUpcomingAuctions=async()=>{
 }
 const updatePaymentStatus=async(id)=>{
   try{
-      const response = await axios.put(`${API_URL}/auctions/update-payment-status/${id}`,{
+      const response = await axios.put(`${API_BASE_URL}/auctions/update-payment-status/${id}`,{
           withCredentials:true
       });
       //console.log("response getLiveAuctions", response.data);
