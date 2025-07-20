@@ -8,7 +8,7 @@ const app=express();
 
 app.use(cors({
   origin: [
-    'https://quirkle-bid.vercel.app',
+    'https://quirkle-bid-1.onrender.com',
     'http://localhost:5173'
   ],
   credentials: true
