@@ -10,7 +10,7 @@ export const getNotificationForUser = async () => {
         withCredentials: true,
         
     });
-    //console.log(response.data, " response from getNotificationForUser");
+    console.log(response.data, " response from getNotificationForUser");
     return response.data;
   };
 

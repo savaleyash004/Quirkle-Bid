@@ -3,7 +3,7 @@ import axios from "axios";
 const API_URL = "https://quirkle-bid-2.onrender.com/api/v1";
 
 export const getAllCategories = async () => {
-  const response = await axios.get(`${API_URL}/product-categories`);
+  const response = await axios.get(`${API_URL}/product-categories`, { withCredentials: true });
   //console.log("response categories", response.data);
   return response.data;
 };
@@ -20,7 +20,7 @@ export const createCategory = async (data) => {
 
 //get a single category
 export const getSingleCategory = async (id) => {
-  const response = await axios.get(`${API_URL}/product-categories/${id}`);
+  const response = await axios.get(`${API_URL}/product-categories/${id}`, { withCredentials: true });
   //console.log("response category", response.data);
   return response.data.data;
 };
