@@ -25,11 +25,29 @@ import AdminHeader from "./admin/components/Header"
 import AdminLogin from "./admin/pages/Login"
 import AdminDashboard from "./admin/Admin"
 import ManageItems from "./components/ManageItems";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 
 const App = () => {
 
 const { user } = useSelector((state) => state.auth);
+
+// Restore user from backend if cookie is present but localStorage is empty
+useEffect(() => {
+  const token = Cookies.get("JwtToken");
+  let user = JSON.parse(localStorage.getItem("user"));
+  if (token && !user) {
+    axios.get("https://quirkle-bid-2.onrender.com/api/v1/users/current-user", { withCredentials: true })
+      .then(res => {
+        if (res.data.data.user) {
+          localStorage.setItem("user", JSON.stringify(res.data.data.user));
+          // Optionally, you can trigger a reload or update state here if needed
+        }
+      });
+  }
+}, []);
 
   // console.log(user,"...")
   console.log(JSON.stringify(user, null, 2), "...");
