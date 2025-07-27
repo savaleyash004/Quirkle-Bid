@@ -162,8 +162,8 @@ const paymentCheckout = asyncHandler(async (req, res) => {
       customer: stripeCustomer.StripeCustomerId,
       mode: "payment",
       payment_method_types: ["card"],
-      success_url: `http://localhost:5173/success/${req.body.sendProductData.id}`,
-      cancel_url: "http://localhost:5173/cancel",
+      success_url: `https://quirkle-bid-3.onrender.com/success/${req.body.sendProductData.id}`,
+      cancel_url: "https://quirkle-bid-3.onrender.com/cancel",
     });
     console.log("chkkkkkkkkkkkkkk,,,");
 

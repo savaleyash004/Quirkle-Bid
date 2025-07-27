@@ -129,7 +129,7 @@ const forgetPasswordSendEmail = asyncHandler(async (req, res) => {
   const resetToken = user.generateResetToken();
   await user.save({ validateBeforeSave: false });
   //send email
-  const resetUrl = `http://localhost:5173/reset-password/${user._id}/${resetToken}`;
+  const resetUrl = `https://quirkle-bid-3.onrender.com/reset-password/${user._id}/${resetToken}`;
   //send email using nodemailer or any other mailing service
   try {
     const transporter = nodemailer.createTransport({
