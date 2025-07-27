@@ -53,7 +53,7 @@ const Cart = () => {
     ];
     const sendProductData = { id: product._id, lineItems: lineItems };
     const { data } = await axios.post(
-      "http://localhost:8000/api/v1/payments/checkout",
+      "https://quirkle-bid-2.onrender.com/api/v1/payments/checkout",
       {
         sendProductData,
       },
