@@ -18,68 +18,71 @@ import EditAuction from "./pages/EditAuction";
 import ErrorPage from "./pages/ErrorPage";
 import Protected, { PublicRoute, SellerRoutes, AdminRoutes } from "./auth/Protected";
 import PaymentSuccess from "./pages/PaymentSuccess";
-import Admin from "./admin/Admin";
-import { useSelector, useDispatch } from "react-redux";
-import AdminFooter from "./admin/components/Footer";
-import AdminHeader from "./admin/components/Header";
-import AdminLogin from "./admin/pages/Login";
-import AdminDashboard from "./admin/Admin";
+import Admin from "./admin/Admin"
+import { useSelector } from "react-redux";
+import AdminFooter from "./admin/components/Footer"
+import AdminHeader from "./admin/components/Header"
+import AdminLogin from "./admin/pages/Login"
+import AdminDashboard from "./admin/Admin"
 import ManageItems from "./components/ManageItems";
-import { useEffect } from "react";
-import Cookies from "js-cookie";
-import axios from "axios";
-import { setUser } from "./store/auth/authSlice";
+
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
 
-  // Restore user from backend if cookie is present but localStorage is empty
-  useEffect(() => {
-    const token = Cookies.get("JwtToken");
-    let user = JSON.parse(localStorage.getItem("user"));
-    if (token && !user) {
-      axios.get("https://quirkle-bid-2.onrender.com/api/v1/users/current-user", { withCredentials: true })
-        .then(res => {
-          if (res.data.data.user) {
-            localStorage.setItem("user", JSON.stringify(res.data.data.user));
-            dispatch(setUser(res.data.data.user));
-          }
-        });
-    } else if (user) {
-      dispatch(setUser(user));
-    }
-  }, [dispatch]);
+const { user } = useSelector((state) => state.auth);
+
+  // console.log(user,"...")
+  console.log(JSON.stringify(user, null, 2), "...");
 
   return (
     <>
       <BrowserRouter>
-        {user && user.userType === "admin" ? <AdminHeader /> : <Header />}
+      {user && user.userType === "admin" ? <AdminHeader /> : <Header />}
+ 
         <Routes>
+          {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/single-auction-detail/:id" element={<SingleAuctionDetail />} />
+          <Route
+            path="/single-auction-detail/:id"
+            element={<SingleAuctionDetail />}
+          />
+
           <Route path="*" element={<ErrorPage />} />
+
           <Route element={<PublicRoute />}>
-            <Route path="/reset-password/:id/:token" element={<ResetNewPassword />} />
+            <Route
+              path="/reset-password/:id/:token"
+              element={<ResetNewPassword />}
+            />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
+
           <Route element={<Protected />}>
             <Route path="/user-profile/*" element={<UserProfile />} />
             <Route path="/edit-auction/:id" element={<EditAuction />} />
             <Route path="/success/:id" element={<PaymentSuccess />} />
             <Route element={<SellerRoutes />}>
               <Route path="/create-auction" element={<UploadItem />} />
+              {/* <Route path="/user-profile/manage-items" element={<ManageItems />} /> */}
+
+
             </Route>
+           
           </Route>
-          <Route path="/admin/*" element={<AdminDashboard />} />
+          {/* <Route element={<AdminRoutes />}> */}
+              <Route path="/admin/*" element={<AdminDashboard />} />
+              
+            {/* </Route> */}
         </Routes>
-        {user && user.userType === "admin" ? <AdminFooter /> : <Footer />}
+
+{user && user.userType === "admin" ? <AdminFooter />: <Footer /> }
+
       </BrowserRouter>
       <ToastContainer />
     </>
