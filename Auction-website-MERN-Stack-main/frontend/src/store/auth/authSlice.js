@@ -3,6 +3,15 @@ import authService from "./authService";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
+export const register = createAsyncThunk("auth/register", async (payload, thunkAPI) => {
+  try {
+    return await authService.register(payload);
+  } catch (error) {
+    const message = (error.response && error.response.data.message) || error.message;
+    return thunkAPI.rejectWithValue({ message, isError: true });
+  }
+});
+
 export const login = createAsyncThunk("auth/login", async (payload, thunkAPI) => {
   try {
     return await authService.login(payload);
@@ -53,6 +62,22 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(register.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = action.payload.message;
+      })
+      .addCase(register.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload.message;
+      })
       .addCase(login.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
@@ -106,4 +131,5 @@ const authSlice = createSlice({
 });
 
 export const { reset, setUser } = authSlice.actions;
+export { register };
 export default authSlice.reducer; 
