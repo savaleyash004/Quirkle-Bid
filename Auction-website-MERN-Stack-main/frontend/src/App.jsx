@@ -19,7 +19,7 @@ import ErrorPage from "./pages/ErrorPage";
 import Protected, { PublicRoute, SellerRoutes, AdminRoutes } from "./auth/Protected";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Admin from "./admin/Admin"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AdminFooter from "./admin/components/Footer"
 import AdminHeader from "./admin/components/Header"
 import AdminLogin from "./admin/pages/Login"
@@ -28,10 +28,12 @@ import ManageItems from "./components/ManageItems";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import { setUser } from "./store/auth/authSlice";
 
 
 const App = () => {
 
+const dispatch = useDispatch();
 const { user } = useSelector((state) => state.auth);
 
 // Restore user from backend if cookie is present but localStorage is empty
@@ -43,11 +45,13 @@ useEffect(() => {
       .then(res => {
         if (res.data.data.user) {
           localStorage.setItem("user", JSON.stringify(res.data.data.user));
-          // Optionally, you can trigger a reload or update state here if needed
+          dispatch(setUser(res.data.data.user));
         }
       });
+  } else if (user) {
+    dispatch(setUser(user));
   }
-}, []);
+}, [dispatch]);
 
   // console.log(user,"...")
   console.log(JSON.stringify(user, null, 2), "...");
