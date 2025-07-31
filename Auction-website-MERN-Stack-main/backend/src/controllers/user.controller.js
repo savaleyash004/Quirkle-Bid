@@ -103,6 +103,9 @@ const loginUser = asyncHandler(async (req, res) => {
     maxAge: 1 * 24 * 60 * 60 * 1000
   };
 
+  console.log('Setting cookie with options:', options);
+  console.log('JWT Token:', JwtToken);
+
   return res
     .status(200)
     .cookie("JwtToken", JwtToken, options)

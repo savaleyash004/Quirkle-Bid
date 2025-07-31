@@ -17,13 +17,12 @@ const login = async (user) => {
 
     const response = await axios.post(`${API_URL}/users/login`, user, {withCredentials: true});
     // save to localStorage
-    //console.log('response login', response.data.data.message);
+    console.log('Login response:', response.data);
+    console.log('Cookies after login:', document.cookie);
     
     if(response.data.data.user){
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
     } 
-
-
 
     return response.data;
    
