@@ -1,13 +1,12 @@
 //upload middleware
 import multer from "multer";
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "public/uploads");
-    },
-    filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${file.originalname}`);
-    },
-    });
+// Use memory storage instead of disk storage for better cloud deployment compatibility
+const storage = multer.memoryStorage();
 
-export const upload = multer({storage});
+export const upload = multer({ 
+    storage,
+    limits: {
+        fileSize: 1024 * 1024 // 1MB limit
+    }
+});

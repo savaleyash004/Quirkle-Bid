@@ -48,7 +48,6 @@ const { user } = useSelector((state) => state.auth);
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="/single-auction-detail/:id"
               element={<SingleAuctionDetail />}
@@ -67,16 +66,14 @@ const { user } = useSelector((state) => state.auth);
             </Route>
 
             <Route element={<Protected />}>
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/user-profile/*" element={<UserProfile />} />
               <Route path="/edit-auction/:id" element={<EditAuction />} />
               <Route path="/success/:id" element={<PaymentSuccess />} />
               <Route element={<SellerRoutes />}>
                 <Route path="/create-auction" element={<UploadItem />} />
                 {/* <Route path="/user-profile/manage-items" element={<ManageItems />} /> */}
-
-
               </Route>
-             
             </Route>
             {/* <Route element={<AdminRoutes />}> */}
                 <Route path="/admin/*" element={<AdminDashboard />} />

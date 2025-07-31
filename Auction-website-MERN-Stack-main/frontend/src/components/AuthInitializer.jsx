@@ -5,22 +5,20 @@ import Cookies from 'js-cookie';
 
 const AuthInitializer = ({ children }) => {
   const dispatch = useDispatch();
-  const { user, isLoading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     // Check if user token exists
     const token = Cookies.get("JwtToken");
     
-    console.log('AuthInitializer - Token:', !!token, 'User:', !!user, 'Loading:', isLoading);
+    console.log('AuthInitializer - Token:', !!token, 'User:', !!user);
     
-    if (token && !isLoading) {
-      // If we have a token but no user in Redux state, fetch the current user
-      if (!user) {
-        console.log('AuthInitializer - Dispatching getCurrentUser');
-        dispatch(getCurrentUser());
-      }
+    // Only try to get current user if we have a token but no user in Redux state
+    if (token && !user) {
+      console.log('AuthInitializer - Dispatching getCurrentUser');
+      dispatch(getCurrentUser());
     }
-  }, [dispatch, user, isLoading]);
+  }, []); // Only run once when component mounts
 
   return children;
 };

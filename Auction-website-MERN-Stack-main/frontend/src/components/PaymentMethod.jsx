@@ -7,8 +7,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
-import { useSelector,useDispatch } from "react-redux";
-import { getCurrentUser } from "../store/auth/authSlice";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const stripe = await loadStripe(
@@ -19,7 +18,7 @@ const CheckoutForm = () => {
   const { user } = useSelector((state) => state.auth);
   const stripe = useStripe();
   const elements = useElements();
-  const dispatch=useDispatch()
+
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,10 +29,7 @@ const CheckoutForm = () => {
 
   },[user])
 
-  useEffect(()=>{
-    dispatch(getCurrentUser())
-    
-  },[])
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();

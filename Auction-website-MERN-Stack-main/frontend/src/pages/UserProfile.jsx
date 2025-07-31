@@ -33,12 +33,13 @@ const UserProfile = () => {
       <div className="flex gap-4 px-5 py-10 flex-wrap lg:flex-nowrap ">
         <Sidebar />
         <Routes>
+          <Route path="/" element={<ProfileComponent />} />
           <Route path="/profile" element={<ProfileComponent />} />
 
           <Route element={<SellerRoutes />}>
             <Route path="/manage-items" element={<ManageItems />} />
-
           </Route>
+          
           <Route path="/bids-items" element={<BidsItem />} />
           <Route path="/notifications" element={<Notifications />} />
           <Route path="/account-settings" element={<AccountSetting />} />
@@ -47,9 +48,7 @@ const UserProfile = () => {
           <Route path="/cart" element={<Cart />} />
 
           <Route path="/logout" element={<ChangePassword />} />
-          <Route path="*" element={<ErrorPage />} />
-
-
+          <Route path="*" element={<ProfileComponent />} />
         </Routes>
       </div>
     </div>

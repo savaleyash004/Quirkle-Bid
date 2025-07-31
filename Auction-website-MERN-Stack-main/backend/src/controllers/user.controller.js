@@ -243,10 +243,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   try {
     const { fullName, email, location, userType, phone, address, city ,gender, description} =
       req.body;
-    const profilePath = req.file?.path;
+    const profilePath = req.file?.buffer;
     const userId = req.user?._id;
     console.log(req.body, "req.body");
-    console.log(profilePath, "req.file")
+    console.log(profilePath ? "Profile buffer present" : "No profile buffer", "profile file")
 
     const user = await User.findById(userId);
     if (!user) {
@@ -405,7 +405,7 @@ const updateUserById = asyncHandler(async (req, res) => {
       console.log(email, " email, ");
       console.log(location, " location, ");
       console.log(userType, " userType, ");
-    const profilePath = req.file?.path;
+    const profilePath = req.file?.buffer;
     
     const userId = req?.params?.id;
     console.log(userId," KDJFKJ");
@@ -417,7 +417,7 @@ const updateUserById = asyncHandler(async (req, res) => {
 
    
     console.log(req.body, "req.body");
-    console.log(profilePath, "req.file")
+    console.log(profilePath ? "Profile buffer present" : "No profile buffer", "profile file")
 
     const user = await User.findById(userId);
     if (!user) {

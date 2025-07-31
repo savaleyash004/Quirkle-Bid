@@ -4,18 +4,11 @@ import { FaRegEdit } from "react-icons/fa";
 import { AiFillLike } from "react-icons/ai";
 import { BsCurrencyExchange } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getCurrentUser } from "../store/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const ProfileComponent = () => {
-  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    dispatch(getCurrentUser());
-    //console.log("useEffect........");
-  }, []);
-  useEffect(() => {}, [user]);
   //console.log(user, "user............");
 
   return (

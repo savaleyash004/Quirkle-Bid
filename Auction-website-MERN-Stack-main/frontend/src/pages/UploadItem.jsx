@@ -69,9 +69,26 @@ const UploadItem = () => {
 
   const handleProductUpload = async (e) => {
     e.preventDefault();
+    
+    // Validate all required fields
+    if (!formData.name || !formData.category || !formData.startTime || 
+        !formData.endTime || !formData.location || !formData.startingPrice || 
+        !formData.description) {
+      alert("Please fill in all required fields");
+      return;
+    }
+    
+    if (!imgRef.current.files[0]) {
+      return alert("Image is required");
+    } else if (imgRef.current.files[0].size > 1024 * 1024) {
+      return alert("Image size should be less than 1mb");
+    }
+    
     //image data so use new formdata
     const data = new FormData();
-    ////console.log(formData);
+    
+    console.log("FormData before sending:", formData);
+    
     data.append("name", formData.name);
     data.append("startingPrice", formData.startingPrice);
     data.append("category", formData.category);
@@ -79,15 +96,14 @@ const UploadItem = () => {
     data.append("endTime", formData.endTime);
     data.append("location", formData.location);
     data.append("description", formData.description);
-
-    if (!imgRef.current.files[0]) {
-      return alert("Image is required");
-    } else if (imgRef.current.files[0].size > 1024 * 1024) {
-      return alert("Image size should be less than 1mb");
-    } else {
-      data.append("image", imgRef.current.files[0]);
+    data.append("image", imgRef.current.files[0]);
+    
+    // Debug: Log FormData contents
+    for (let [key, value] of data.entries()) {
+      console.log(`${key}: ${value}`);
     }
-    ////console.log("before data sentidn", isSuccess);
+    
+    console.log("before data sending", isSuccess);
     dispatch(createAuction(data));
 
     //dispatch(getAllAuctions());

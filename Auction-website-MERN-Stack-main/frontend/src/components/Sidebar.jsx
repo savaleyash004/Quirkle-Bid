@@ -44,7 +44,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/profile"
+              to="profile"
               onClick={() => handleLinkClick("/user-profile/profile")}
             >
               <FaUser
@@ -66,7 +66,7 @@ const Sidebar = () => {
                       ? "bg-theme-color hover:text-white"
                       : ""
                   }`}
-                  to="/user-profile/manage-items"
+                  to="manage-items"
                   onClick={() => handleLinkClick("/user-profile/manage-items")}
                 >
                   <FaEdit
@@ -98,7 +98,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/bids-items"
+              to="bids-items"
               onClick={() => handleLinkClick("/user-profile/bids-items")}
             >
               <IoIosListBox
@@ -117,7 +117,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/notifications"
+              to="notifications"
               onClick={() => handleLinkClick("/user-profile/notifications")}
             >
               <IoIosNotifications
@@ -138,7 +138,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/account-settings"
+              to="account-settings"
               onClick={() => handleLinkClick("/user-profile/account-settings")}
             >
               <IoMdSettings
@@ -159,7 +159,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/change-password"
+              to="change-password"
               onClick={() => handleLinkClick("/user-profile/change-password")}
             >
               <RiLockPasswordFill
@@ -180,7 +180,7 @@ const Sidebar = () => {
                   ? "bg-theme-color hover:text-white"
                   : ""
               }`}
-              to="/user-profile/payment-method"
+              to="payment-method"
               onClick={() => handleLinkClick("/user-profile/payment-method")}
             >
               <IoWalletOutline

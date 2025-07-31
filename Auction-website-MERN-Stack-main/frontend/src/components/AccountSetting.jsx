@@ -20,10 +20,7 @@ const AccountSetting = () => {
     phone: user?.phone || "",
   });
   const dispatch = useDispatch();
-  useEffect(() => {
-    //console.log("useEffect........");
-    dispatch(getCurrentUser());
-  }, []);
+
   useEffect(() => {}, [user]);
 
   const [imgUrl, setImgUrl] = useState(user?.profilePicture);
@@ -66,7 +63,6 @@ const AccountSetting = () => {
       }
     });
     setImgUrl(null);
-    dispatch(getCurrentUser());
 
     dispatch(reset());
   };

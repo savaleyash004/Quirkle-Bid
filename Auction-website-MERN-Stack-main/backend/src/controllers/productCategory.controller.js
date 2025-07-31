@@ -19,7 +19,7 @@ import Auction from "../models/auction.model.js";
 const createProductCategory = asyncHandler(async (req, res) => {
     try {
         const { name, description } = req.body;
-        const image = req.file?.path;
+        const image = req.file?.buffer;
         
         // Check if fields are empty
         if (!name || !description || !image) {
@@ -101,7 +101,7 @@ const updateProductCategory = asyncHandler(async (req, res) => {
 try {
     const { id } = req.params;
     const { name, description } = req.body;
-    const image = req.file?.path;
+    const image = req.file?.buffer;
     const productCategory = await ProductCategory.findById(id);
 
     if (!productCategory) {

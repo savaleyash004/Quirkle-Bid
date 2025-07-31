@@ -14,6 +14,9 @@ import mongoose from 'mongoose';
 // @access Private/ Seller only
 const createAuction = asyncHandler(async (req, res) => {
   try {
+    console.log("Request body:", req.body);
+    console.log("Request file:", req.file);
+    
     const {
       name,
       description,
@@ -23,7 +26,7 @@ const createAuction = asyncHandler(async (req, res) => {
       startingPrice,
       location,
     } = req.body;
-    const image = req.file?.path;
+    const image = req.file?.buffer;
 
     console.log(name, "name");
     console.log(description, "description");
@@ -31,6 +34,8 @@ const createAuction = asyncHandler(async (req, res) => {
     console.log(startTime, "startTime");
     console.log(endTime, "endTime");
     console.log(startingPrice, "startingPrice");
+    console.log(location, "location");
+    console.log(image ? "Image buffer present" : "No image buffer", "image status");
     // Check if fields are empty
     if (
       !name ||
@@ -63,7 +68,7 @@ const createAuction = asyncHandler(async (req, res) => {
 
     const imgUrlCloudinary = await uploadOnCloudinary(image);
 
-    if (!imgUrlCloudinary) {
+    if (!imgUrlCloudinary?.url) {
       return res
         .status(500)
         .json(new ApiResponse(500, "Error uploading image"));
@@ -375,7 +380,7 @@ const updateSingleAuactionById = asyncHandler(async (req, res) => {
       startingPrice,
       location,
     } = req.body;
-    const image = req.file?.path;
+    const image = req.file?.buffer;
 
     console.log(req.body, "req.body........");
 const auction = await Auction.findById(req.params.id);
