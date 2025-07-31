@@ -7,7 +7,15 @@ const app=express();
 
 
 
-app.use(cors({origin:"https://quirkle-bid-3.onrender.com",credentials:true}));
+app.use(cors({
+  origin: [
+    "https://quirkle-bid-3.onrender.com",
+    "https://quirkle-bid-2.onrender.com",
+    "http://localhost:5173",
+    "http://localhost:3000"
+  ],
+  credentials: true
+}));
 app.use(express.json({limit:"16kb"}));
 app.use(express.urlencoded({extended:true,limit:"16kb"}))
 app.use(express.static("public"))

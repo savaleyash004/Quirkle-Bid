@@ -6,24 +6,35 @@ import { useSelector} from "react-redux";
 
 const useAuth = () => {
   const token = Cookies.get("JwtToken");
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user, isLoading } = useSelector((state) => state.auth);
+  const localUser = JSON.parse(localStorage.getItem("user"));
 
   if(!token){
     localStorage.removeItem("user")
   }
-  return token && user;
+  
+  const isAuthenticated = token && (user || localUser);
+  console.log('useAuth - Token:', !!token, 'Redux User:', !!user, 'Local User:', !!localUser, 'Authenticated:', isAuthenticated);
+  
+  // Return true if we have both token and user (either from Redux state or localStorage)
+  return isAuthenticated;
 };
 
 const PublicRoute = () => {
   const auth = useAuth();
+  const { isLoading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  //console.log(auth, "auth.,,,,,,,,.......public....");
 
   useEffect(() => {
-    if (auth) {
+    if (auth && !isLoading) {
       navigate("/dashboard");
     }
-  }, [auth, navigate]);
+  }, [auth, isLoading, navigate]);
+
+  // Don't render anything while loading
+  if (isLoading) {
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  }
 
   return auth ? null : <Outlet />;
 };
@@ -45,14 +56,25 @@ const AdminPublicRoute = () => {
 
 const Protected = () => {
   const auth = useAuth();
+  const { isLoading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  //console.log(auth, "auth.,,,,,,,,.......protected....");
+  
+  console.log('Protected - Auth:', auth, 'Loading:', isLoading);
+  
   useEffect(() => {
-    if (!auth) {
+    if (!auth && !isLoading) {
+      console.log('Protected - Redirecting to login');
       navigate("/login");
     }
-  }, [auth, navigate]);
+  }, [auth, isLoading, navigate]);
 
+  // Show loading or the protected content
+  if (isLoading) {
+    console.log('Protected - Showing loading');
+    return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  }
+
+  console.log('Protected - Rendering:', auth ? 'Outlet' : 'null');
   return auth ? <Outlet /> : null;
 };
 

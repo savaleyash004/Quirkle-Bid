@@ -17,8 +17,8 @@ export const register = createAsyncThunk("auth/register",async (payload,thunkAPI
 
 export const login = createAsyncThunk("auth/login",async (payload,thunkAPI)=>{
     try {
-        return await authService.login(payload);
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        const response = await authService.login(payload);
+        return response;
     } catch (error) {
         const message =(error.response && error.response.data.message) || error.message;
         console.log(message, "error message")
