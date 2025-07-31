@@ -90,53 +90,6 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-        {/* OUR TEAM SECTION*/}
-        <div className="m-auto">
-          <div className="flex flex-col items-center text-center mb-10">
-            <span className="text-lg tracking-[5px] uppercase text-theme-color font-semibold">
-              Our Team
-            </span>
-            <h2 className="mt-2 text-4xl font-medium">Meet With Our Experts</h2>
-          </div>
-          <div className=" grid  md:grid-cols-3 items-center justify-center gap-5 max-w-[1500px]">
-            {/* dev component */}
-            {devs.map(({ id, src, name, skill, link1, link2 }) => (
-              <div
-                key={id}
-                className="border border-border-info-color bg-theme-bg p-5 flex flex-col items-center gap-3 text-center rounded-[20px]"
-              >
-                <div className="rounded-[20px] overflow-hidden">
-                  <img
-                    className="rounded-[20px] hover:scale-105 transition-all duration-300"
-                    src={src}
-                    alt="creatorimg"
-                  />
-                </div>
-                <div>
-                  <span className="text-xl font-medium">{name}</span>
-                  <br />
-                  <span className="text-body-text-color">{skill}</span>
-                </div>
-                <div className="flex gap-2">
-                  <a
-                    className="rounded-full bg-theme-color p-2 hover:bg-hover transition-all duration-300"
-                    href={link2}
-                    target="_blank"
-                  >
-                    <FaGithub size={20} />
-                  </a>
-                  <a
-                    className="rounded-full bg-theme-color p-2 hover:bg-hover transition-all duration-300"
-                    href={link1}
-                    target="_blank"
-                  >
-                    <FaLinkedinIn size={20} />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
         <div className="max-w-[1500px] m-auto">
           <div className="mb-10 text-center">
             <span className="text-lg tracking-[5px] uppercase text-theme-color font-semibold">

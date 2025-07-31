@@ -85,7 +85,7 @@ const { user } = useSelector((state) => state.auth);
 
         </BrowserRouter>
       </AuthInitializer>
-      <AuthDebug />
+      {/* <AuthDebug /> */}
       <ToastContainer />
     </>
   );
