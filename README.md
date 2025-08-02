@@ -133,22 +133,3 @@ npm run dev
 
 ---
 
-## 📄 License
-
-MIT
-
----
-
-## 🙏 Credits
-
-- [Cloudinary](https://cloudinary.com/)
-- [Stripe](https://stripe.com/)
-- [Render](https://render.com/)
-- [React](https://reactjs.org/)
-- [Node.js](https://nodejs.org/)
-
----
-
-## 💬 Support
-
-For issues, open a GitHub issue or contact the maintainer.
